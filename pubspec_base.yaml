@@ -179,6 +179,11 @@ dependency_overrides:
       url: https://github.com/cake-tech/web3dart.git
       ref: cake
   flutter_secure_storage_platform_interface: 1.0.2
+  flutter_secure_storage:
+    git:
+      url: https://github.com/cake-tech/flutter_secure_storage.git
+      path: flutter_secure_storage
+      ref: ca897a08677edb443b366352dd7412735e098e7b
   protobuf: ^3.1.0
   bitcoin_base:
     git:
@@ -199,6 +204,7 @@ dependency_overrides:
       ref: 27ad7c2efae8d7460325c74b90f660085cbd0685
   web_socket_channel: ^3.0.2
   freezed_annotation: 2.4.4
+  intl: 0.20.2
 
 flutter_icons:
   image_path: "assets/images/app_logo.png"
