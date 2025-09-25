@@ -776,9 +776,9 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: da83a23f3a011cb49eb3b6513cd485b3fb8867ff
-      resolved-ref: da83a23f3a011cb49eb3b6513cd485b3fb8867ff
-      url: "https://github.com/OmarHatem28/payjoin-flutter"
+      ref: cake-v3
+      resolved-ref: "15d64407dd17a63258cd0fdada1e39a16041dd74"
+      url: "https://github.com/konstantinullrich/payjoin-flutter"
     source: git
     version: "0.23.0"
   petitparser:
@@ -1000,8 +1000,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "sp_v4.0.0"
-      resolved-ref: "2554cb8bd3ee1d026bc63e76a30d1226960c7cb4"
+      ref: "sp_v4.0.1"
+      resolved-ref: "40ed3ce8319744907bef3b25bc6e0af8428c8724"
       url: "https://github.com/cake-tech/sp_scanner"
     source: git
     version: "0.0.1"
