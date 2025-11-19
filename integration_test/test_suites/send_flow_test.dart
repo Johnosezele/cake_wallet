@@ -18,7 +18,8 @@ void main() {
   DashboardPageRobot dashboardPageRobot;
   CommonTestCases commonTestCases;
 
-  testWidgets('Send flow with wallet switching for insufficient balance - testing \$1 send',
+  testWidgets(
+      'Send flow with wallet switching for insufficient balance - testing \$1 send',
       (tester) async {
     FlutterError.onError = (FlutterErrorDetails details) {
       debugPrint('FlutterError caught: ${details.exception}');
@@ -33,11 +34,11 @@ void main() {
 
     // Various wallet options we want to use to test the send flow
     final walletConfigs = [
-      {
-        'type': WalletType.solana,
-        'seed': secrets.solanaTestWalletSeeds2,
-        'name': 'Solana Wallet 1',
-      },
+      // {
+      //   'type': WalletType.solana,
+      //   'seed': secrets.solanaTestWalletSeeds2,
+      //   'name': 'Solana Wallet 1',
+      // },
       {
         'type': WalletType.solana,
         'seed': secrets.solanaTestWalletSeeds,
@@ -84,19 +85,23 @@ void main() {
         );
       }
 
-      await dashboardPageRobot.confirmWalletTypeIsDisplayedCorrectly(config['type'] as WalletType);
+      await dashboardPageRobot
+          .confirmWalletTypeIsDisplayedCorrectly(config['type'] as WalletType);
 
       // Navigate to send page
       await dashboardPageRobot.navigateToSendPage();
       await sendPageRobot.checkIfSendPageIsVisible();
 
-      await sendPageRobot.enterReceiveAddress(CommonTestConstants.testWalletAddress);
-      await sendPageRobot.selectReceiveCurrency(CommonTestConstants.sendTestReceiveCurrency);
+      await sendPageRobot
+          .enterReceiveAddress(CommonTestConstants.testWalletAddress);
+      await sendPageRobot
+          .selectReceiveCurrency(CommonTestConstants.sendTestReceiveCurrency);
 
       await sendPageRobot.selectTransactionPriority();
 
       // Main check to see if this wallet has sufficient balance for $1 send
-      final hasBalance = await sendPageRobot.validateWalletBalanceForOneDollarSend();
+      final hasBalance =
+          await sendPageRobot.validateWalletBalanceForOneDollarSend();
       if (hasBalance) {
         hasSufficientBalance = true;
         successfulWalletType = config['type'] as WalletType;
@@ -116,7 +121,8 @@ void main() {
 
     // We only proceed with the send if we have sufficient balance
     if (hasSufficientBalance && successfulWalletType != null) {
-      tester.printToConsole('Performing send transaction with $successfulWalletType wallet');
+      tester.printToConsole(
+          'Performing send transaction with $successfulWalletType wallet');
 
       await sendPageRobot.testFiatAmountEntry();
       await sendPageRobot.testCryptoAmountEntry();

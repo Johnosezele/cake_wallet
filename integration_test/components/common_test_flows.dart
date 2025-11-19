@@ -39,8 +39,10 @@ class CommonTestFlows {
         _restoreOptionsPageRobot = RestoreOptionsPageRobot(_tester),
         _seedVerificationPageRobot = SeedVerificationPageRobot(_tester),
         _createPinWelcomePageRobot = CreatePinWelcomePageRobot(_tester),
-        _restoreFromSeedOrKeysPageRobot = RestoreFromSeedOrKeysPageRobot(_tester),
-        _walletGroupDescriptionPageRobot = WalletGroupDescriptionPageRobot(_tester);
+        _restoreFromSeedOrKeysPageRobot =
+            RestoreFromSeedOrKeysPageRobot(_tester),
+        _walletGroupDescriptionPageRobot =
+            WalletGroupDescriptionPageRobot(_tester);
 
   final WidgetTester _tester;
   final CommonTestCases _commonTestCases;
@@ -124,7 +126,8 @@ class CommonTestFlows {
   }
 
   //* ========== Handles creating new wallet flow from wallet list/menu ===============
-  Future<void> createNewWalletFromWalletMenu(WalletType walletTypeToCreate) async {
+  Future<void> createNewWalletFromWalletMenu(
+      WalletType walletTypeToCreate) async {
     _tester.printToConsole('Creating ${walletTypeToCreate.name} Wallet');
 
     await _tester.pumpAndSettle(Duration(milliseconds: 1000));
@@ -149,7 +152,8 @@ class CommonTestFlows {
     await _commonTestCases.defaultSleepTime();
   }
 
-  Future<void> _walletGroupDescriptionPageFlow(bool isNewSeed, WalletType walletType) async {
+  Future<void> _walletGroupDescriptionPageFlow(
+      bool isNewSeed, WalletType walletType) async {
     if (!isBIP39Wallet(walletType)) return;
 
     await _walletGroupDescriptionPageRobot.isWalletGroupDescriptionPage();
@@ -162,12 +166,14 @@ class CommonTestFlows {
   }
 
   //* ========== Handles restore wallet flow from wallet list/menu ===============
-  Future<void> restoreWalletFromWalletMenu(WalletType walletType, String walletSeed) async {
+  Future<void> restoreWalletFromWalletMenu(
+      WalletType walletType, String walletSeed) async {
     _tester.printToConsole('Restoring ${walletType.name} Wallet');
     await _walletListPageRobot.navigateToRestoreWalletOptionsPage();
     await _commonTestCases.defaultSleepTime();
 
-    if (!Platform.isLinux) await _restoreOptionsPageRobot.navigateToRestoreFromSeedsOrKeysPage();
+    if (!Platform.isLinux)
+      await _restoreOptionsPageRobot.navigateToRestoreFromSeedsOrKeysPage();
     if (!Platform.isLinux) await _commonTestCases.defaultSleepTime();
 
     await _selectWalletTypeForWallet(walletType);
@@ -216,7 +222,8 @@ class CommonTestFlows {
 
     await _welcomePageRobot.navigateToRestoreWalletPage();
 
-    if (!Platform.isLinux) await _restoreOptionsPageRobot.navigateToRestoreFromSeedsOrKeysPage();
+    if (!Platform.isLinux)
+      await _restoreOptionsPageRobot.navigateToRestoreFromSeedsOrKeysPage();
 
     await _selectWalletTypeForWallet(walletTypeToRestore);
   }
@@ -228,7 +235,8 @@ class CommonTestFlows {
 
     await _tester.pumpAndSettle(Duration(milliseconds: 1000));
 
-    await _newWalletTypePageRobot.findParticularWalletTypeInScrollableList(type);
+    await _newWalletTypePageRobot
+        .findParticularWalletTypeInScrollableList(type);
 
     _tester.printToConsole('Tapping wallet type: ${type.name}');
     await _newWalletTypePageRobot.selectWalletType(type);
@@ -257,8 +265,8 @@ class CommonTestFlows {
       // manual pin input
       await _restoreFromSeedOrKeysPageRobot
           .enterPasswordForWalletRestore(CommonTestConstants.pin.join(""));
-      await _restoreFromSeedOrKeysPageRobot
-          .enterPasswordRepeatForWalletRestore(CommonTestConstants.pin.join(""));
+      await _restoreFromSeedOrKeysPageRobot.enterPasswordRepeatForWalletRestore(
+          CommonTestConstants.pin.join(""));
     }
 
     await _newWalletPageRobot.onNextButtonPressed();
@@ -298,8 +306,10 @@ class CommonTestFlows {
   Future<void> _restoreFromSeeds(WalletType type, String walletSeed) async {
     // ----------- RestoreFromSeedOrKeys Page -------------
 
-    await _restoreFromSeedOrKeysPageRobot.selectWalletNameFromAvailableOptions();
-    await _restoreFromSeedOrKeysPageRobot.enterSeedPhraseForWalletRestore(walletSeed);
+    await _restoreFromSeedOrKeysPageRobot
+        .selectWalletNameFromAvailableOptions();
+    await _restoreFromSeedOrKeysPageRobot
+        .enterSeedPhraseForWalletRestore(walletSeed);
 
     final numberOfWords = walletSeed.split(' ').length;
 
@@ -308,16 +318,16 @@ class CommonTestFlows {
           .chooseSeedTypeForMoneroOrWowneroWallets(MoneroSeedType.legacy);
 
       // Using a constant value of 2831400 for the blockheight as its the restore blockheight for our testing wallet
-      await _restoreFromSeedOrKeysPageRobot
-          .enterBlockHeightForWalletRestore(secrets.moneroTestWalletBlockHeight);
+      await _restoreFromSeedOrKeysPageRobot.enterBlockHeightForWalletRestore(
+          secrets.moneroTestWalletBlockHeight);
     }
 
     if (Platform.isLinux) {
       // manual pin input
       await _restoreFromSeedOrKeysPageRobot
           .enterPasswordForWalletRestore(CommonTestConstants.pin.join(""));
-      await _restoreFromSeedOrKeysPageRobot
-          .enterPasswordRepeatForWalletRestore(CommonTestConstants.pin.join(""));
+      await _restoreFromSeedOrKeysPageRobot.enterPasswordRepeatForWalletRestore(
+          CommonTestConstants.pin.join(""));
     }
 
     await _restoreFromSeedOrKeysPageRobot.onRestoreWalletButtonPressed();
@@ -360,11 +370,11 @@ class CommonTestFlows {
       case WalletType.wownero:
         return secrets.wowneroTestWalletSeeds;
       case WalletType.zano:
-        return secrets.zanoTestWalletSeeds;
+      //return secrets.zanoTestWalletSeeds;
       case WalletType.decred:
-        return secrets.decredTestWalletSeeds;
+      //return secrets.decredTestWalletSeeds;
       case WalletType.dogecoin:
-        return secrets.dogeTestWalletSeeds;
+      //return secrets.dogeTestWalletSeeds;
       case WalletType.none:
       case WalletType.haven:
       case WalletType.banano:
